@@ -6,7 +6,7 @@ local DataStoreService = game:GetService("DataStoreService")
 local PlayerCash = DataStoreService:GetDataStore("PlayerCash")
 
 -- When A Player Is Added It Makes Sure The Player Has Their Stats
-function OnPlayerAdded(player)
+function OnPlayerAdded(player: Player)
   -- Declares The Value Of Stats And Instances A Folder In The Player
 	local stats = Instance.new("Folder", player)
   -- Changes The Folders Name To "leaderstats"
@@ -39,7 +39,7 @@ function OnPlayerAdded(player)
 		else
 			warn("Was problem with datastore! (Attempts left ", attempts, ")")
 		end
-		wait(1)
+		task.wait(1)
 		attempts = attempts - 1
 	until attempts <= 0
 -- If The Value Still Hasn't Loaded Of The Cash After Joining Essentially This Adds A Warn To The Console And Kicks The Player With The Reason Of "Couldn't load data, please try to rejoin later"
@@ -53,12 +53,12 @@ function OnPlayerAdded(player)
 		Cash.Value = data
 	end
 	while true do
-		wait(2)
+		task.wait(2)
 		Cash.Value = Cash.Value + 2
 	end
 end
 -- This Is For When The Player Leaves It Calls A DataStore Save Using A Pcall And Stuff But Im Not Gonna Go Into Detail On This
-function OnPlayerRemoving(player)
+function OnPlayerRemoving(player: Player)
 	if player:FindFirstChild("CashDataLoaded") and player.CashDataLoaded.Value == true then
 		local attempts = 10
 
